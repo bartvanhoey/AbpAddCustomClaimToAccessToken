@@ -1,7 +1,7 @@
 using System;
 using Volo.Abp.Domain.Entities;
 
-namespace BookStore.Domain.Domain
+namespace BookStore.Domain.Books
 {
     public class Book :  Entity<Guid>
     {

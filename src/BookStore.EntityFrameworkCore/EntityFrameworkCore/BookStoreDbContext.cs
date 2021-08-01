@@ -12,7 +12,6 @@ using Volo.Abp.PermissionManagement.EntityFrameworkCore;
 using Volo.Abp.SettingManagement.EntityFrameworkCore;
 using Volo.Abp.TenantManagement;
 using Volo.Abp.TenantManagement.EntityFrameworkCore;
-using BookStore.Domain.Domain;
 
 namespace BookStore.EntityFrameworkCore
 {
@@ -52,7 +51,6 @@ namespace BookStore.EntityFrameworkCore
         public DbSet<TenantConnectionString> TenantConnectionStrings { get; set; }
 
         #endregion
-        public DbSet<Book> Books { get; set; }
         
         public BookStoreDbContext(DbContextOptions<BookStoreDbContext> options)
             : base(options)
