@@ -45,6 +45,13 @@ namespace BookStore.Blazor.Menus
                 )
             );
 
+            var bookStoreMenu = new ApplicationMenuItem("BookStore", l["Menu:BookStore"], icon: "fa fa-book");
+            var booksMenu = new ApplicationMenuItem("BookStore.Books", l["Menu:Books"], url: "/books");
+            bookStoreMenu.AddItem(booksMenu);
+
+            context.Menu.AddItem(bookStoreMenu);
+
+
             return Task.CompletedTask;
         }
 
