@@ -1,5 +1,5 @@
 @page "/books"
-@* @attribute [Authorize(BookStorePermissions.Books.Default)] *@
+@attribute [Authorize(BookStorePermissions.Books.Default)]
 @using BookStore.Permissions
 @using Microsoft.AspNetCore.Authorization
 @using Volo.Abp.Application.Dtos
@@ -184,8 +184,8 @@
 {
     public Books()
     {
-        @* CreatePolicyName = BookStorePermissions.Books.Create; *@
-        @* UpdatePolicyName = BookStorePermissions.Books.Update; *@
-        @* DeletePolicyName = BookStorePermissions.Books.Delete; *@
+        CreatePolicyName = BookStorePermissions.Books.Create;
+        UpdatePolicyName = BookStorePermissions.Books.Update;
+        DeletePolicyName = BookStorePermissions.Books.Delete;
     }
 }

@@ -7,6 +7,7 @@ using Volo.Abp.Account.Localization;
 using Volo.Abp.Authorization.Permissions;
 using Volo.Abp.UI.Navigation;
 using Volo.Abp.Users;
+using BookStore.Permissions;
 
 namespace BookStore.Blazor.Menus
 {
@@ -31,7 +32,7 @@ namespace BookStore.Blazor.Menus
             }
         }
 
-        private Task ConfigureMainMenuAsync(MenuConfigurationContext context)
+        private async Task ConfigureMainMenuAsync(MenuConfigurationContext context)
         {
             var l = context.GetLocalizer<BookStoreResource>();
 
@@ -46,13 +47,13 @@ namespace BookStore.Blazor.Menus
             );
 
             var bookStoreMenu = new ApplicationMenuItem("BookStore", l["Menu:BookStore"], icon: "fa fa-book");
-            var booksMenu = new ApplicationMenuItem("BookStore.Books", l["Menu:Books"], url: "/books");
-            bookStoreMenu.AddItem(booksMenu);
-
             context.Menu.AddItem(bookStoreMenu);
 
-
-            return Task.CompletedTask;
+            if (await context.IsGrantedAsync(BookStorePermissions.Books.Default))
+            {
+                var booksMenu = new ApplicationMenuItem("BookStore.Books", l["Menu:Books"], url: "/books");
+                bookStoreMenu.AddItem(booksMenu);
+            }
         }
 
         private Task ConfigureUserMenuAsync(MenuConfigurationContext context)

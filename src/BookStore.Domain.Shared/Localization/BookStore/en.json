@@ -29,9 +29,13 @@
         "Enum:BookType:8": "Poetry",
         "BookName": "Book Name",
         "BookPublishDate": "BookPublishDate",
-        "BookType":  "Type",
-        "BookPrice":  "Price",
-        "BookCreationTime":  "CreationTime"
-
+        "BookType": "Type",
+        "BookPrice": "Price",
+        "BookCreationTime": "CreationTime",
+        "Permission:BookStoreGroup" : "BookStore management",
+        "Permission:Books": "Books Management",
+        "Permission:Books:Create": "Creating books",
+        "Permission:Books:Update": "Editing books",
+        "Permission:Books:Delete": "Deleting books"
     }
 }
