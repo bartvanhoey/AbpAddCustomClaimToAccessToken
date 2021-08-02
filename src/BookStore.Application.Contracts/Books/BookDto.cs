@@ -1,12 +1,12 @@
 using System;
 using BookStore.Domain.Shared.Books;
-using Volo.Abp.Domain.Entities;
+using Volo.Abp.Application.Dtos;
 
-namespace BookStore.Domain.Books
+namespace BookStore.Application.Contracts.Books
 {
-    public class Book :  Entity<Guid>
+    public class BookDto :  AuditedEntityDto<Guid>
     {
-        public string Name { get; set; }
+         public string Name { get; set; }
         public DateTime PublishDate { get; set; }
 
         public BookType Type { get; set; }

@@ -1,4 +1,6 @@
 ﻿using AutoMapper;
+using BookStore.Application.Contracts.Books;
+using BookStore.Domain.Books;
 
 namespace BookStore
 {
@@ -9,6 +11,10 @@ namespace BookStore
             /* You can configure your AutoMapper mapping configuration here.
              * Alternatively, you can split your mapping configurations
              * into multiple profile classes for a better organization. */
+
+             CreateMap<Book,BookDto>();
+             CreateMap<UpdateBookDto, Book>();
+             CreateMap<CreateBookDto, Book>();
         }
     }
 }
