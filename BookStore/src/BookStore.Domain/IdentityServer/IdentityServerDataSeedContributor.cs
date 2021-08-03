@@ -160,7 +160,7 @@ namespace BookStore.IdentityServer
                     corsOrigins: new[] { webClientRootUrl.RemovePostFix("/") }
                 );
             }
-            
+
 
             // Blazor Client
             var blazorClientId = configurationSection["BookStore_Blazor:ClientId"];
@@ -179,9 +179,7 @@ namespace BookStore.IdentityServer
                     corsOrigins: new[] { blazorRootUrl.RemovePostFix("/") }
                 );
             }
-            
-            
-            
+
             // Swagger Client
             var swaggerClientId = configurationSection["BookStore_Swagger:ClientId"];
             if (!swaggerClientId.IsNullOrWhiteSpace())
@@ -196,6 +194,22 @@ namespace BookStore.IdentityServer
                     requireClientSecret: false,
                     redirectUri: $"{swaggerRootUrl}/swagger/oauth2-redirect.html",
                     corsOrigins: new[] { swaggerRootUrl.RemovePostFix("/") }
+                );
+            }
+
+            // BookStoreConsole Client
+            var bookStoreConsoleClientId = configurationSection["BookStore_Console:ClientId"];
+            if (!bookStoreConsoleClientId.IsNullOrWhiteSpace())
+            {
+                var bookStoreConsoleRootUrl = configurationSection["BookStore_Console:RootUrl"].TrimEnd('/');
+                await CreateClientAsync(
+                    name: bookStoreConsoleClientId,
+                    scopes: commonScopes,
+                    grantTypes: new[] { "password", "client_credentials", "authorization_code" },
+                    secret: configurationSection["BookStore_Console:ClientSecret"]?.Sha256(),
+                    requireClientSecret: false,
+                    redirectUri: $"{bookStoreConsoleRootUrl}/authentication/login-callback",
+                    corsOrigins: new[] { bookStoreConsoleRootUrl.RemovePostFix("/") }
                 );
             }
         }
