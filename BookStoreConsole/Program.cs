@@ -10,7 +10,7 @@ namespace BookStoreConsole
         {
             // if setBearerToken = false, should throw HttpRequestException: 'Response status code does not indicate success: 401 (Unauthorized).'
             // if setBearerToken = true, API should be called an list of books should be returned
-            var setBearerToken = true;
+            const bool setBearerToken = true;
 
             var httpService = new HttpService();
             var httpClient = await httpService.GetHttpClientAsync(setBearerToken);
@@ -21,11 +21,12 @@ namespace BookStoreConsole
             var json = await response.Content.ReadAsStringAsync();
 
             var books = JsonConvert.DeserializeObject<ListResultDto<BookDto>>(json);
-            foreach (var book in books.Items)
-            {
-                Console.WriteLine(book.Name);
-            }
 
+            Console.WriteLine("====================================");
+            if (books?.Items != null)
+                foreach (var book in books.Items)
+                    Console.WriteLine(book.Name);
+            Console.WriteLine("====================================");
             Console.ReadKey();
         }
     }
