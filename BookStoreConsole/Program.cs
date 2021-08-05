@@ -10,7 +10,7 @@ namespace BookStoreConsole
         {
             // if setBearerToken = false, should throw HttpRequestException: 'Response status code does not indicate success: 401 (Unauthorized).'
             // if setBearerToken = true, API should be called an list of books should be returned
-            const bool setBearerToken = true;
+            const bool setBearerToken = false;
 
             var httpService = new HttpService();
             var httpClient = await httpService.GetHttpClientAsync(setBearerToken);

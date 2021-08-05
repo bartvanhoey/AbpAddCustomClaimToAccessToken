@@ -8,7 +8,7 @@
           "name": "Blazor",
           "type": "blazorwasm",
           "request": "launch",
-          "cwd": "${workspaceFolder}/src/BookStore.Blazor",
+          "cwd": "${workspaceFolder}/BookStore/src/BookStore.Blazor",
           "url": "https://localhost:44307"
       },
       {
@@ -17,9 +17,9 @@
           "request": "launch",
           "preLaunchTask": "buildApi",
           // If you have changed target frameworks, make sure to update the program path.
-          "program": "${workspaceFolder}/src/BookStore.HttpApi.Host/bin/Debug/net5.0/BookStore.HttpApi.Host.dll",
+          "program": "${workspaceFolder}/BookStore/src/BookStore.HttpApi.Host/bin/Debug/net5.0/BookStore.HttpApi.Host.dll",
           "args": [],
-          "cwd": "${workspaceFolder}/src/BookStore.HttpApi.Host",
+          "cwd": "${workspaceFolder}/BookStore/src/BookStore.HttpApi.Host",
           "stopAtEntry": false,
           // Enable launching a web browser when ASP.NET Core starts. For more information: https://aka.ms/VSCode-CS-LaunchJson-WebBrowser
           "serverReadyAction": {
@@ -30,7 +30,7 @@
               "ASPNETCORE_ENVIRONMENT": "Development"
           },
           "sourceFileMap": {
-              "/Views": "${workspaceFolder}/Views"
+              "/Views": "${workspaceFolder}/BookStore/Views"
           }
       },
       {
@@ -39,9 +39,9 @@
           "request": "launch",
           "preLaunchTask": "buildApi",
           // If you have changed target frameworks, make sure to update the program path.
-          "program": "${workspaceFolder}/src/BookStore.HttpApi.Host/bin/Debug/net5.0/BookStore.HttpApi.Host.dll",
+          "program": "${workspaceFolder}/BookStore/src/BookStore.HttpApi.Host/bin/Debug/net5.0/BookStore.HttpApi.Host.dll",
           "args": [],
-          "cwd": "${workspaceFolder}/src/BookStore.HttpApi.Host",
+          "cwd": "${workspaceFolder}/BookStore/src/BookStore.HttpApi.Host",
           "stopAtEntry": false,
           // Enable launching a web browser when ASP.NET Core starts. For more information: https://aka.ms/VSCode-CS-LaunchJson-WebBrowser
           "serverReadyAction": {
@@ -52,7 +52,7 @@
               "ASPNETCORE_ENVIRONMENT": "Staging"
           },
           "sourceFileMap": {
-              "/Views": "${workspaceFolder}/Views"
+              "/Views": "${workspaceFolder}/BookStore/Views"
           }
       },
       {
@@ -61,9 +61,9 @@
           "request": "launch",
           "preLaunchTask": "buildDbMigrator",
           // If you have changed target frameworks, make sure to update the program path.
-          "program": "${workspaceFolder}/src/BookStore.DbMigrator/bin/Debug/net5.0/BookStore.DbMigrator.dll",
+          "program": "${workspaceFolder}/BookStore/src/BookStore.DbMigrator/bin/Debug/net5.0/BookStore.DbMigrator.dll",
           "args": [],
-          "cwd": "${workspaceFolder}/src/BookStore.DbMigrator",
+          "cwd": "${workspaceFolder}/BookStore/src/BookStore.DbMigrator",
           "stopAtEntry": false,
           // Enable launching a web browser when ASP.NET Core starts. For more information: https://aka.ms/VSCode-CS-LaunchJson-WebBrowser
           "serverReadyAction": {
@@ -74,7 +74,7 @@
               "ASPNETCORE_ENVIRONMENT": "Development"
           },
           "sourceFileMap": {
-              "/Views": "${workspaceFolder}/Views"
+              "/Views": "${workspaceFolder}/BookStore/Views"
           }
       },
       {
@@ -83,15 +83,15 @@
           "request": "launch",
           "preLaunchTask": "buildDbMigrator",
           // If you have changed target frameworks, make sure to update the program path.
-          "program": "${workspaceFolder}/src/BookStore.DbMigrator/bin/Debug/net5.0/BookStore.DbMigrator.dll",
+          "program": "${workspaceFolder}/BookStore/src/BookStore.DbMigrator/bin/Debug/net5.0/BookStore.DbMigrator.dll",
           "args": [],
-          "cwd": "${workspaceFolder}/src/BookStore.DbMigrator",
+          "cwd": "${workspaceFolder}/BookStore/src/BookStore.DbMigrator",
           "stopAtEntry": false,
           "env": {
               "ASPNETCORE_ENVIRONMENT": "Staging"
           },
           "sourceFileMap": {
-              "/Views": "${workspaceFolder}/Views"
+              "/Views": "${workspaceFolder}/BookStore/Views"
           }
       }
   ],

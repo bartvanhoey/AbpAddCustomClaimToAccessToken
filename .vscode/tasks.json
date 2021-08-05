@@ -7,7 +7,7 @@
            "type": "process",
            "args": [
                "build",
-               "${workspaceFolder}/src/BookStore.HttpApi.Host/BookStore.HttpApi.Host.csproj",
+               "${workspaceFolder}/BookStore/src/BookStore.HttpApi.Host/BookStore.HttpApi.Host.csproj",
                "/property:GenerateFullPaths=true",
                "/consoleloggerparameters:NoSummary"
            ],
@@ -19,7 +19,7 @@
            "type": "process",
            "args": [
                "build",
-               "${workspaceFolder}/src/BookStore.DbMigrator/BookStore.DbMigrator.csproj",
+               "${workspaceFolder}/BookStore/src/BookStore.DbMigrator/BookStore.DbMigrator.csproj",
                "/property:GenerateFullPaths=true",
                "/consoleloggerparameters:NoSummary"
            ],
@@ -31,7 +31,7 @@
            "type": "process",
            "args": [
                "publish",
-               "${workspaceFolder}/src/BookStore.HttpApi.Host/BookStore.HttpApi.Host.csproj",
+               "${workspaceFolder}/BookStore/src/BookStore.HttpApi.Host/BookStore.HttpApi.Host.csproj",
                "/property:GenerateFullPaths=true",
                "/consoleloggerparameters:NoSummary"
            ],
@@ -44,7 +44,7 @@
            "args": [
                "watch",
                "run",
-               "${workspaceFolder}/src/BookStore.HttpApi.Host/BookStore.HttpApi.Host.csproj",
+               "${workspaceFolder}/BookStore/src/BookStore.HttpApi.Host/BookStore.HttpApi.Host.csproj",
                "/property:GenerateFullPaths=true",
                "/consoleloggerparameters:NoSummary"
            ],
