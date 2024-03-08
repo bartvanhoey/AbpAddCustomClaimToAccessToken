@@ -26,7 +26,7 @@ The following tools are needed to be able to run the solution and follow along.
 ### Create a new ABP Framework application
 
 ```bash
-  abp new BookStore -u Blazor -o BookStore
+  abp new BookStore -u blazor -o BookStore
 ```
 
 ### Implement the Web Application Development tutorial (part1-5)
