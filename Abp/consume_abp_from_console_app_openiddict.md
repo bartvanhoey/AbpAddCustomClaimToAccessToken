@@ -18,11 +18,9 @@ The source code of both projects is [available on GitHub](https://github.com/bar
 
 The following tools are needed to be able to run the solution and follow along.
 
-* .NET 6.0 SDK
-* VsCode, Visual Studio 2022 or another compatible IDE
-* ABP CLI 6.0.0
-
-## ABP Framework application
+- .NET 8.0 SDK
+- VsCode, Visual Studio 2022 or another compatible IDE
+- ABP CLI 8.0.0
 
 ### Create a new ABP Framework application
 
@@ -40,7 +38,7 @@ To follow along make sure you have a protected BookAppService in the BookStore a
     "BookStore_Console": {
         "ClientId": "BookStore_Console",
         "ClientSecret": "1q2w3e*",
-        "RootUrl": "https://localhost:<your-api-portnumber>" 
+        "RootUrl": "https://localhost:<your-api-portnumber>"
     }
 ```
 
@@ -51,7 +49,7 @@ To follow along make sure you have a protected BookAppService in the BookStore a
     var bookStoreConsoleClientId = configurationSection["BookStore_Console:ClientId"];
     if (!bookStoreConsoleClientId.IsNullOrWhiteSpace())
     {
-        var bookStoreConsoleRootUrl = configurationSection["BookStore_Console:RootUrl"].TrimEnd('/');
+        var bookStoreConsoleRootUrl = configurationSection["BookStore_Console:RootUrl"]?.TrimEnd('/');
         await CreateApplicationAsync(
             name: bookStoreConsoleClientId,
             type: OpenIddictConstants.ClientTypes.Confidential,
@@ -83,11 +81,10 @@ To apply the settings above you need to run the DbMigrator project. After, check
     dotnet new console -n BookStoreConsole
 ```
 
-### Install nuget packages (in terminal window or nuget package manager)
+### Install OidcClient nuget package (in terminal window or nuget package manager)
 
 ```bash
-  dotnet add package IdentityModel.OidcClient --version 5.0.2
-  dotnet add package Newtonsoft.Json --version 13.0.1
+  dotnet add package IdentityModel.OidcClient --version 5.2.1
 ```
 
 ### Add a HttpService class in the root of the project
@@ -103,38 +100,36 @@ When you make a request now to the protected BookStore API with the httpClient, 
 ```csharp
 using IdentityModel.Client;
 
-namespace BookStoreConsole
+public class HttpService
 {
-    public class HttpService
+    public async Task<Lazy<HttpClient>> GetHttpClientAsync(bool setBearerToken, string apiEndpoint)
     {
-        public async Task<Lazy<HttpClient>> GetHttpClientAsync(bool setBearerToken, string apiEndpoint)
-        {
-            var client = new Lazy<HttpClient>(() => new HttpClient());
+        var client = new Lazy<HttpClient>(() => new HttpClient());
 
-            if (setBearerToken) client.Value.SetBearerToken(await GetAccessToken(apiEndpoint));
-            
-            client.Value.BaseAddress = new Uri(apiEndpoint); 
-            return await Task.FromResult(client);
-        }
-        private static async Task<TokenResponse> GetTokensFromBookStoreApi(string apiEndpoint)
-        {
-            var discoveryCache = new DiscoveryCache(apiEndpoint);
-            var disco = await discoveryCache.GetAsync();
-            var httpClient = new Lazy<HttpClient>(() => new HttpClient());
-            var response = await httpClient.Value.RequestPasswordTokenAsync(new PasswordTokenRequest
-            {
-                Address = disco.TokenEndpoint, // apiEndpoint/connect/token
-                ClientId = "BookStore_Console",
-                ClientSecret = "1q2w3e*",
-                UserName = "admin",
-                Password = "1q2w3E*",
-                Scope = "openid offline_access address email phone profile roles BookStore",
-            });
-            return response.IsError ?  new TokenResponse() : response;
-        }
-        private static async Task<string> GetAccessToken(string apiEndpoint) => (await GetTokensFromBookStoreApi(apiEndpoint)).AccessToken;
+        if (setBearerToken) client.Value.SetBearerToken(await GetAccessToken(apiEndpoint));
+
+        client.Value.BaseAddress = new Uri(apiEndpoint);
+        return await Task.FromResult(client);
     }
+    private static async Task<TokenResponse> GetTokensFromBookStoreApi(string apiEndpoint)
+    {
+        var discoveryCache = new DiscoveryCache(apiEndpoint);
+        var disco = await discoveryCache.GetAsync();
+        var httpClient = new Lazy<HttpClient>(() => new HttpClient());
+        var response = await httpClient.Value.RequestPasswordTokenAsync(new PasswordTokenRequest
+        {
+            Address = disco.TokenEndpoint, // apiEndpoint/connect/token
+            ClientId = "BookStore_Console",
+            ClientSecret = "1q2w3e*",
+            UserName = "admin",
+            Password = "1q2w3E*",
+            Scope = "openid offline_access address email phone profile roles BookStore",
+        });
+        return response.IsError ? new TokenResponse() : response;
+    }
+    private static async Task<string> GetAccessToken(string apiEndpoint) => (await GetTokensFromBookStoreApi(apiEndpoint)).AccessToken;
 }
+
 ```
 
 ### Main Method
@@ -145,38 +140,42 @@ Next, we make a request to the BookStore API to obtain the list of books.
 Do not forget to change the apiEndpoint to the correct ABP Framework API endpoint (Swagger pager).
 
 ```csharp
-using BookStoreConsole;
-using BookStoreConsole.BookStoreConsole;
-using Newtonsoft.Json;
+using System.Text.Json;
 using static System.Console;
-using static Newtonsoft.Json.JsonConvert;
 
 // if setBearerToken = false, should throw JsonReaderException: 'json cannot be serialized.'
 // if setBearerToken = true, API should be called an list of books should be returned
 const bool setBearerToken = false;
-const string apiEndpoint = "https://localhost:44317/";
+const string apiEndpoint = "https://localhost:44388/";
 
-var httpClient = await new HttpService().GetHttpClientAsync(setBearerToken, apiEndpoint);
-
-var response = await httpClient.Value.GetAsync($"{apiEndpoint}api/app/book");
-response.EnsureSuccessStatusCode();
-
-var json = await response.Content.ReadAsStringAsync();
 try
 {
-    var books = DeserializeObject<ListResultDto<BookDto>>(json);
+    var httpClient = await new HttpService().GetHttpClientAsync(setBearerToken, apiEndpoint);
+
+    var response = await httpClient.Value.GetAsync($"{apiEndpoint}api/app/book");
+    response.EnsureSuccessStatusCode();
+
+    var json = await response.Content.ReadAsStringAsync();
+
+    ListResultDto<BookDto>? books = new();
+
+
+    books = JsonSerializer.Deserialize<ListResultDto<BookDto>>(json);
     WriteLine("====================================");
     if (books?.Items != null)
         foreach (var book in books.Items)
             WriteLine(book.Name);
-    WriteLine("====================================");
 
 }
-catch (JsonReaderException)
+catch (HttpRequestException)
 {
-    WriteLine("Deserializing went wrong");
+    WriteLine("Is apiEndpoint correct?");
 }
-
+catch (JsonException)
+{
+    WriteLine("setBearerToken to true");
+}
+WriteLine("====================================");
 
 ```
 

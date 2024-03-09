@@ -16,8 +16,7 @@
           "type": "coreclr",
           "request": "launch",
           "preLaunchTask": "buildApi",
-          // If you have changed target frameworks, make sure to update the program path.
-          "program": "${workspaceFolder}/src/BookStore.HttpApi.Host/bin/Debug/net6.0/BookStore.HttpApi.Host.dll",
+          "program": "${workspaceFolder}/src/BookStore.HttpApi.Host/bin/Debug/net8.0/BookStore.HttpApi.Host.dll",
           "args": [],
           "cwd": "${workspaceFolder}/src/BookStore.HttpApi.Host",
           "stopAtEntry": false,
@@ -38,8 +37,7 @@
           "type": "coreclr",
           "request": "launch",
           "preLaunchTask": "buildApi",
-          // If you have changed target frameworks, make sure to update the program path.
-          "program": "${workspaceFolder}/src/BookStore.HttpApi.Host/bin/Debug/net6.0/BookStore.HttpApi.Host.dll",
+          "program": "${workspaceFolder}/src/BookStore.HttpApi.Host/bin/Debug/net8.0/BookStore.HttpApi.Host.dll",
           "args": [],
           "cwd": "${workspaceFolder}/src/BookStore.HttpApi.Host",
           "stopAtEntry": false,
@@ -60,8 +58,7 @@
           "type": "coreclr",
           "request": "launch",
           "preLaunchTask": "buildDbMigrator",
-          // If you have changed target frameworks, make sure to update the program path.
-          "program": "${workspaceFolder}/src/BookStore.DbMigrator/bin/Debug/net6.0/BookStore.DbMigrator.dll",
+          "program": "${workspaceFolder}/src/BookStore.DbMigrator/bin/Debug/net8.0/BookStore.DbMigrator.dll",
           "args": [],
           "cwd": "${workspaceFolder}/src/BookStore.DbMigrator",
           "stopAtEntry": false,
@@ -82,8 +79,7 @@
           "type": "coreclr",
           "request": "launch",
           "preLaunchTask": "buildDbMigrator",
-          // If you have changed target frameworks, make sure to update the program path.
-          "program": "${workspaceFolder}/src/BookStore.DbMigrator/bin/Debug/net6.0/BookStore.DbMigrator.dll",
+          "program": "${workspaceFolder}/src/BookStore.DbMigrator/bin/Debug/net8.0/BookStore.DbMigrator.dll",
           "args": [],
           "cwd": "${workspaceFolder}/src/BookStore.DbMigrator",
           "stopAtEntry": false,
@@ -101,4 +97,4 @@
           "configurations": ["ApiDevelopment", "Blazor"]
       }
   ]
-}   
+}

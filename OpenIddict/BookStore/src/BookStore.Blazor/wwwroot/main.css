@@ -1,4 +1,10 @@
 /* Global styles for the BookStore application */
+
+:root .lpx-brand-logo {
+    --lpx-logo: url('/images/logo/leptonx/logo-light.png');
+    --lpx-logo-icon: url('/images/logo/leptonx/logo-light-thumbnail.png');
+}
+
 .spinner {
     width: 40px;
     height: 40px;

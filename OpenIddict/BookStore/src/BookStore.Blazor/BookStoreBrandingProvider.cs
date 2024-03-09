@@ -1,11 +1,10 @@
 ﻿using Volo.Abp.DependencyInjection;
 using Volo.Abp.Ui.Branding;
 
-namespace BookStore.Blazor
+namespace BookStore.Blazor;
+
+[Dependency(ReplaceServices = true)]
+public class BookStoreBrandingProvider : DefaultBrandingProvider
 {
-    [Dependency(ReplaceServices = true)]
-    public class BookStoreBrandingProvider : DefaultBrandingProvider
-    {
-        public override string AppName => "BookStore";
-    }
+    public override string AppName => "BookStore";
 }

@@ -1,16 +1,15 @@
 ﻿using System.Threading.Tasks;
 using Volo.Abp.DependencyInjection;
 
-namespace BookStore.Data
-{
-    /* This is used if database provider does't define
+namespace BookStore.Data;
+
+/* This is used if database provider does't define
  * IBookStoreDbSchemaMigrator implementation.
  */
-    public class NullBookStoreDbSchemaMigrator : IBookStoreDbSchemaMigrator, ITransientDependency
+public class NullBookStoreDbSchemaMigrator : IBookStoreDbSchemaMigrator, ITransientDependency
+{
+    public Task MigrateAsync()
     {
-        public Task MigrateAsync()
-        {
-            return Task.CompletedTask;
-        }
+        return Task.CompletedTask;
     }
 }

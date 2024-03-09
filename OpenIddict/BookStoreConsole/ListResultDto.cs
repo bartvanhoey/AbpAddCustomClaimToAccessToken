@@ -1,15 +1,9 @@
-using System;
+using System.Text.Json.Serialization;
 
-namespace BookStoreConsole
+public class ListResultDto<T>
 {
- using System.Collections.Generic;
-
-namespace BookStoreConsole
-{
-    public class ListResultDto<T>
-    {
-        public IReadOnlyList<T> Items { get; set; }
-    }
+    [JsonPropertyName("items")]
+    public IReadOnlyList<T> Items { get; set; } = [];
 }
 
-}
+

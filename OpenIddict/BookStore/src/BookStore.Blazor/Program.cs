@@ -1,24 +1,23 @@
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
 
-namespace BookStore.Blazor
+namespace BookStore.Blazor;
+
+public class Program
 {
-    public class Program
+    public async static Task Main(string[] args)
     {
-        public async static Task Main(string[] args)
+        var builder = WebAssemblyHostBuilder.CreateDefault(args);
+
+        var application = await builder.AddApplicationAsync<BookStoreBlazorModule>(options =>
         {
-            var builder = WebAssemblyHostBuilder.CreateDefault(args);
+            options.UseAutofac();
+        });
 
-            var application = await builder.AddApplicationAsync<BookStoreBlazorModule>(options =>
-            {
-                options.UseAutofac();
-            });
+        var host = builder.Build();
 
-            var host = builder.Build();
+        await application.InitializeApplicationAsync(host.Services);
 
-            await application.InitializeApplicationAsync(host.Services);
-
-            await host.RunAsync();
-        }
+        await host.RunAsync();
     }
 }

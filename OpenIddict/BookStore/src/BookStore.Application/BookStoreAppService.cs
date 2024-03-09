@@ -4,15 +4,14 @@ using System.Text;
 using BookStore.Localization;
 using Volo.Abp.Application.Services;
 
-namespace BookStore
-{
-    /* Inherit your application services from this class.
+namespace BookStore;
+
+/* Inherit your application services from this class.
  */
-    public abstract class BookStoreAppService : ApplicationService
+public abstract class BookStoreAppService : ApplicationService
+{
+    protected BookStoreAppService()
     {
-        protected BookStoreAppService()
-        {
-            LocalizationResource = typeof(BookStoreResource);
-        }
+        LocalizationResource = typeof(BookStoreResource);
     }
 }

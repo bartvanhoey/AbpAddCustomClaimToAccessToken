@@ -2,10 +2,10 @@ using System;
 using Volo.Abp.Application.Dtos;
 using Volo.Abp.Application.Services;
 
-namespace BookStore.Application.Contracts.Books
+namespace BookStore.Books
 {
-    public interface IBookAppService : ICrudAppService<BookDto, Guid, PagedAndSortedResultRequestDto, CreateUpdateBookDto>, IApplicationService
-    {
-        
-    }
+    public interface IBookAppService : ICrudAppService<BookDto, Guid, PagedAndSortedResultRequestDto, CreateUpdateBookDto>, IApplicationService   
+  {
+
+  }
 }
